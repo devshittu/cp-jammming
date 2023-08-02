@@ -2,6 +2,9 @@ import React from 'react'
 import "./Track.css";
 
 export const Track = (props) => {
+  const addTrack = ()=>{
+    props.onAdd(props.track);
+  }
   return (
     <div className="Track">
       <div className="Track-information">
@@ -10,9 +13,8 @@ export const Track = (props) => {
           {props.track.artist} | {props.track.album}
         </p>
       </div>
-      <button className="Track-action">
-        {/* <!-- + or - will go here -->  */}
-        {props.track.name}
+      <button className="Track-action" onClick={addTrack}>
+        {/* <!-- + or - will go here -->  */}+
       </button>
     </div>
   );
