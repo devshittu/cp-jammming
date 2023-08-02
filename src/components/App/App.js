@@ -50,6 +50,13 @@ const savePlaylist = () => {
   setPlaylistName("DefaultPlaylist");
   setPlaylistTracks([]);
 };
+  const search = (term) => {
+    // Log the search term to the console
+    console.log("Search term:", term);
+    // In a later assessment, hook this method up to the Spotify API to get search results
+    // For now, let's just log the search term and set an empty array for searchResults
+    setSearchResults([]);
+  };
   return (
     <div>
       <h1>
@@ -57,7 +64,7 @@ const savePlaylist = () => {
       </h1>
       <div className="App">
         {/* <!-- Add a SearchBar component --> */}
-        <SearchBar />
+        <SearchBar onSearch={search} />
         <div className="App-playlist">
           {/* <!-- Add a SearchResults component -->*/}
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
