@@ -22,7 +22,10 @@ function App(props) {
           {/* <!-- Add a SearchResults component -->*/}
           <SearchResults searchResults={searchResults} />
           {/*<!-- Add a Playlist component --> */}
-          <Playlist />
+          <Playlist
+            playlistName={playlistName}
+            playlistTracks={playlistTracks}
+          />
         </div>
       </div>
     </div>
