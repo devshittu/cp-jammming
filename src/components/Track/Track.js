@@ -5,6 +5,9 @@ export const Track = (props) => {
   const addTrack = ()=>{
     props.onAdd(props.track);
   }
+  const removeTrack = () => {
+    props.onRemove(props.track);
+  };
   return (
     <div className="Track">
       <div className="Track-information">
@@ -13,9 +16,22 @@ export const Track = (props) => {
           {props.track.artist} | {props.track.album}
         </p>
       </div>
-      <button className="Track-action" onClick={addTrack}>
-        {/* <!-- + or - will go here -->  */}+
-      </button>
+          {/* <!-- + or - will go here -->  */}
+      {props.isRemoval ? (
+        <button
+          className="Track-action"
+          onClick={removeTrack }
+        >
+          {"-"}
+        </button>
+      ) : (
+        <button
+          className="Track-action"
+          onClick={ addTrack}
+        >
+          {"+"}
+        </button>
+      )}
     </div>
   );
 }
