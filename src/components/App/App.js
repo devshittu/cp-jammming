@@ -10,6 +10,17 @@ function App(props) {
   const [playlistTracks, setPlaylistTracks] = useState([
     { name: "Name of sound", artist: "artist", album: "ablum", id: 1 },
   ]);
+  const addTrack = (track) => {
+    const isTrackInPlaylist = playlistTracks.some(
+      (playlistTrack) => playlistTrack.id === track.id
+    );
+
+    if (!isTrackInPlaylist) {
+      const newPlaylist = [...playlistTracks, track];
+      setPlaylistTracks(newPlaylist);
+    }
+  };
+
   return (
     <div>
       <h1>
@@ -20,7 +31,7 @@ function App(props) {
         <SearchBar />
         <div className="App-playlist">
           {/* <!-- Add a SearchResults component -->*/}
-          <SearchResults searchResults={searchResults} />
+          <SearchResults searchResults={searchResults} onAdd={addTrack} />
           {/*<!-- Add a Playlist component --> */}
           <Playlist
             playlistName={playlistName}
