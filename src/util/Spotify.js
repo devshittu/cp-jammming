@@ -1,4 +1,3 @@
-import axios from "axios";
 let accessToken = "";
 const clientId = "08288e7262af4076926795a6c5949cb8"; // Replace with your Spotify application client ID
 const redirectUri = "http://localhost:3000/"; // Replace with your redirect URI
@@ -61,19 +60,29 @@ const Spotify = {
       uri: track.uri,
     }));
   },
+  // Step 90: Create the savePlaylist method
+  async savePlaylist(playlistName, trackUris) {
+    // Step 90: Check if there are values saved to the method's two arguments. If not, return.
+    if (!playlistName || !trackUris || trackUris.length === 0) {
+      return;
+    }
+
+    // Your code to implement the three requests to the Spotify API will go here
+    // Step 91: Create default variables for access token, headers, and user ID
+    const accessToken = Spotify.getAccessToken();
+    const headers = { Authorization: `Bearer ${accessToken}` };
+    let userId = "";
+
+    // Step 92: Make a request to get the user's Spotify username
+    const response = await fetch("https://api.spotify.com/v1/me", { headers });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch user data.");
+    }
+
+    const data = await response.json();
+    userId = data.id;
+  },
 };
-
-function generateRandomString(length) {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let result = "";
-
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters.charAt(randomIndex);
-  }
-
-  return result;
-}
 
 export default Spotify;

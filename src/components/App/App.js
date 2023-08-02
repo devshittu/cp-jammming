@@ -1,8 +1,10 @@
-import './App.css';
+import { useState } from 'react';
 import {SearchResults} from '../SearchResults/SearchResults'
 import { Playlist } from "../Playlist/Playlist";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { useState } from 'react';
+import Spotify from '../../util/Spotify'; // Import the Spotify module
+
+import './App.css';
 const moreTracks = [
   { name: "Track 2", artist: "Artist 2", album: "Album 2", id: 2 },
   { name: "Track 3", artist: "Artist 3", album: "Album 3", id: 3 },
@@ -54,8 +56,18 @@ const savePlaylist = () => {
     // Log the search term to the console
     console.log("Search term:", term);
     // In a later assessment, hook this method up to the Spotify API to get search results
+
+    // Use Spotify.search() to fetch search results
+    Spotify.search(term)
+      .then((tracks) => {
+        // Update the state of searchResults with the value resolved from the promise
+        setSearchResults(tracks);
+      })
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
+      });
     // For now, let's just log the search term and set an empty array for searchResults
-    setSearchResults([]);
+    // setSearchResults([]);
   };
   return (
     <div>
