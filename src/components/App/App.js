@@ -38,7 +38,18 @@ function App(props) {
     const updatePlaylistName = (name) => {
       setPlaylistName(name);
     };
+const savePlaylist = () => {
+  // Generate an array of uri values called trackURIs from the playlistTracks property
+  const trackURIs = playlistTracks.map((track) => track.uri);
+  // In a later step, pass the trackURIs array and playlistName to a method that saves the user's playlist to their account
+  // For now, let's just log the trackURIs and playlistName to see the generated data
+  console.log("Playlist Name:", playlistName);
+  console.log("Track URIs:", trackURIs);
 
+  // Reset the state of the playlist name and tracks array after saving the playlist
+  setPlaylistName("DefaultPlaylist");
+  setPlaylistTracks([]);
+};
   return (
     <div>
       <h1>
@@ -56,6 +67,7 @@ function App(props) {
             playlistTracks={playlistTracks}
             onRemove={removeTrack}
             onNameChange={updatePlaylistName}
+            onSave={savePlaylist}
           />
         </div>
       </div>
