@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
 export const SearchBar = () => {
   return (
-    <div class="SearchBar">
+    <div className="SearchBar">
       <input placeholder="Enter A Song, Album, or Artist" />
-      <button class="SearchButton">SEARCH</button>
+      <button className="SearchButton">SEARCH</button>
     </div>
   );
-}
+};
