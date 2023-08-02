@@ -1,8 +1,8 @@
 import axios from "axios";
-let accessToken = '';
+let accessToken = "";
 const clientId = "08288e7262af4076926795a6c5949cb8"; // Replace with your Spotify application client ID
-const redirectUri = 'http://localhost:3000/'; // Replace with your redirect URI
-const scope = 'playlist-modify-public'; // Add any other scopes you need for your application
+const redirectUri = "http://localhost:3000/"; // Replace with your redirect URI
+const scope = "playlist-modify-public"; // Add any other scopes you need for your application
 
 const Spotify = {
   getAccessToken() {
@@ -34,7 +34,9 @@ const Spotify = {
   },
   async search(term) {
     const accessToken = Spotify.getAccessToken();
-    const endpoint = `https://api.spotify.com/v1/search?type=track&q=${encodeURIComponent(term)}`;
+    const endpoint = `https://api.spotify.com/v1/search?type=track&q=${encodeURIComponent(
+      term
+    )}`;
 
     const response = await fetch(endpoint, {
       headers: {
@@ -43,15 +45,23 @@ const Spotify = {
     });
 
     if (!response.ok) {
-      throw new Error('Request failed!');
+      throw new Error("Request failed!");
     }
 
     const data = await response.json();
-    return data.tracks.items;
+    // Step 87: Map the JSON to an array of tracks
+    if (!data.tracks || !data.tracks.items) {
+      return [];
+    }
+    return data.tracks.items.map((track) => ({
+      id: track.id,
+      name: track.name,
+      artist: track.artists[0].name,
+      album: track.album.name,
+      uri: track.uri,
+    }));
   },
 };
-
-
 
 function generateRandomString(length) {
   const characters =
