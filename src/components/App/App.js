@@ -21,6 +21,14 @@ function App(props) {
     }
   };
 
+  const removeTrack = (track) => {
+    const updatedPlaylist = playlistTracks.filter(
+      (playlistTrack) => playlistTrack.id !== track.id
+    );
+    setPlaylistTracks(updatedPlaylist);
+  };
+
+
   return (
     <div>
       <h1>
@@ -31,7 +39,11 @@ function App(props) {
         <SearchBar />
         <div className="App-playlist">
           {/* <!-- Add a SearchResults component -->*/}
-          <SearchResults searchResults={searchResults} onAdd={addTrack} />
+          <SearchResults
+            searchResults={searchResults}
+            onAdd={addTrack}
+            onRemove={removeTrack}
+          />
           {/*<!-- Add a Playlist component --> */}
           <Playlist
             playlistName={playlistName}

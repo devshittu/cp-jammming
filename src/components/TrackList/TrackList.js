@@ -8,7 +8,13 @@ export const TrackList = (props) => {
       {/* <!-- You will add a map method that renders a set of Track components  --> */}
       {/* {JSON.stringify(props)} */}
       {props.tracks.map((track) => (
-        <Track key={track.id} track={track} onAdd={props.onAdd} />
+        <Track
+          key={track.id}
+          track={track}
+          onAdd={props.onAdd}
+          onRemove={props.onRemove}
+          isRemoval={props.isRemoval}
+        />
       ))}
     </div>
   );
