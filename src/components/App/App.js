@@ -41,16 +41,17 @@ function App(props) {
       setPlaylistName(name);
     };
 const savePlaylist = () => {
-  // Generate an array of uri values called trackURIs from the playlistTracks property
-  const trackURIs = playlistTracks.map((track) => track.uri);
-  // In a later step, pass the trackURIs array and playlistName to a method that saves the user's playlist to their account
-  // For now, let's just log the trackURIs and playlistName to see the generated data
-  console.log("Playlist Name:", playlistName);
-  console.log("Track URIs:", trackURIs);
 
-  // Reset the state of the playlist name and tracks array after saving the playlist
-  setPlaylistName("DefaultPlaylist");
-  setPlaylistTracks([]);
+    const trackUris = playlistTracks.map((track) => track.uri);
+    Spotify.savePlaylist(playlistName, trackUris)
+      .then(() => {
+        // Playlist saved successfully, reset playlistName and playlistTracks state
+        setPlaylistName("New Playlist");
+        setPlaylistTracks([]);
+      })
+      .catch((error) => {
+        console.error("Error saving playlist:", error);
+      });
 };
   const search = (term) => {
     // Log the search term to the console

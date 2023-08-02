@@ -82,6 +82,46 @@ const Spotify = {
 
     const data = await response.json();
     userId = data.id;
+
+    // Step 93: Create a new playlist in the user's account
+    const createPlaylistResponse = await fetch(
+      `https://api.spotify.com/v1/users/${userId}/playlists`,
+      {
+        method: "POST",
+        headers: {
+          ...headers,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: playlistName }),
+      }
+    );
+
+    if (!createPlaylistResponse.ok) {
+      throw new Error("Failed to create playlist.");
+    }
+
+    const playlistData = await createPlaylistResponse.json();
+    const playlistId = playlistData.id;
+
+    // Step 94: Add tracks to the newly-created playlist
+    const addTracksResponse = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      {
+        method: "POST",
+        headers: {
+          ...headers,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uris: trackUris }),
+      }
+    );
+
+    if (!addTracksResponse.ok) {
+      throw new Error("Failed to add tracks to playlist.");
+    }
+
+    // All requests completed successfully, return the playlist ID
+    return playlistId;
   },
 };
 
