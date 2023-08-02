@@ -11,7 +11,6 @@ const moreTracks = [
   { name: "Track 4", artist: "Artist 4", album: "Album 4", id: 4 },
   { name: "Track 5", artist: "Artist 5", album: "Album 5", id: 5 },
   { name: "Track 6", artist: "Artist 6", album: "Album 6", id: 6 },
-  // Add more data entries as needed...
 ];
 function App(props) {
   const [searchResults, setSearchResults] = useState(moreTracks)
@@ -45,7 +44,6 @@ const savePlaylist = () => {
     const trackUris = playlistTracks.map((track) => track.uri);
     Spotify.savePlaylist(playlistName, trackUris)
       .then(() => {
-        // Playlist saved successfully, reset playlistName and playlistTracks state
         setPlaylistName("New Playlist");
         setPlaylistTracks([]);
       })
@@ -54,21 +52,14 @@ const savePlaylist = () => {
       });
 };
   const search = (term) => {
-    // Log the search term to the console
     console.log("Search term:", term);
-    // In a later assessment, hook this method up to the Spotify API to get search results
-
-    // Use Spotify.search() to fetch search results
     Spotify.search(term)
       .then((tracks) => {
-        // Update the state of searchResults with the value resolved from the promise
         setSearchResults(tracks);
       })
       .catch((error) => {
         console.error("Error fetching search results:", error);
       });
-    // For now, let's just log the search term and set an empty array for searchResults
-    // setSearchResults([]);
   };
   return (
     <div>
