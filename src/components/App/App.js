@@ -6,6 +6,10 @@ import { useState } from 'react';
 
 function App(props) {
   const [searchResults, setSearchResults] = useState([{name: 'Name of sound', artist: 'artist', album: 'ablum', id: 1}])
+  const [playlistName, setPlaylistName] = useState('DefaultPlaylist');
+  const [playlistTracks, setPlaylistTracks] = useState([
+    { name: "Name of sound", artist: "artist", album: "ablum", id: 1 },
+  ]);
   return (
     <div>
       <h1>
